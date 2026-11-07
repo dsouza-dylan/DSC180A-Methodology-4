@@ -1,14 +1,15 @@
-### Dylan Dsouza (dydsouza@ucsd.edu)
-**Section D18:** Polygenic Precision Genomics with Dr. Tiffany Amariuta
+# DSC 180A Methodology Assignment 4
+## Dylan Dsouza (dydsouza@ucsd.edu)
+### **Section D18:** Polygenic Precision Genomics with Dr. Tiffany Amariuta
 
 **1. What is the most interesting topic covered in your domain this quarter?**  
-Answer
+A topic I found especially interesting was Linkage Disequilibrium (LD), which essentially describes the manner in which genetic variants tend to be inherited. To be precise, it refers to the non-random association of genetic variants within a population due to physical proximity on the chromosome. This is very crucial to genomics studies as it provides a method to impute unmeasured genetic variants by using LD patterns from panels such as the 1000 Genomes Project. As such, a GWAS can detect an SNP that sits in high LD with the actual causal variant even without measuring it directly. Downstream approaches can then be used to narrow this broader peak of associations down to a smaller subset of likely causal variants and genes.
 
 **2. Describe a potential investigation you would like to pursue for your Quarter 2 Project.**  
-Answer
+One direction for a potential investigation could be colocalization analysis: the framework by which we can determine whether two traits share the same causal variants within a genomic region (i.e. whether a single variant is responsible for both the GWAS and eQTL signals at a locus). This serves as a robustness check against the assumption that a GWAS signal acts through the nearest gene by physical proximity alone. Moreover, nearby variants are often inherited together and can appear highly correlated despite having distinct underlying causes, which colocalization explicitly accounts for. Specifically, I would apply a Bayesian colocalization method to pair my genome-wide cis-eQTL results with publicly available disease GWAS summary statistics (say Type 2 diabetes). Then, I would compute posterior probabilities of shared causal variants at each locus, and attempt to isolate a list of genes most likely to mediate the trait.  This analysis would provide an opportunity to go beyond the statistical association and toward identifying the specific variants that shape disease risk.
 
 **3. What is a potential change you’d make to the approach taken in your current Quarter 1 Project?**  
-Answer
+I believe one of the biggest issues with our Quarter 1 data is the ancestry representation. Since our panel data consists of a predominantly European population, extending to non-European panels would help increase the ancestry representation within the data. Moreover, the PRS we constructed in Quarter 1 using height does not actually have corresponding phenotype data (the actual height measurements). As such, while we can plot the distribution of height PRS, we cannot actually benchmark it to truth labels or infer predictive accuracy. This could be addressed by applying the same pipeline to a dataset such as the UK Biobank, where individual-level genotypes and measured heights are both available, allowing a direct comparison between predicted and observed phenotype.
 
 **4. What other techniques would you be interested in using in your project?**  
-Answer
+An interesting technique that could be applied is a transcriptome-wide association study (TWAS), which uses cis-eQTL weights to predict each individual's gene expression from their genotypes and then tests those predicted expression levels for association with the trait. This would directly extend the GWAS and cis-eQTL work from Quarter 1 and improve interpretability, as GWAS typically flags non-coding variants that are difficult to interpret, whereas TWAS implicates specific genes whose regulation is associated with the trait. Alongside colocalization, I would also be interested in applying fine-mapping methods such as SuSiE (Sum of Single Effects) to the cis-eQTL regions, which would help narrow each LD block down to the variants most likely to be causal before any downstream colocalization or TWAS inference.
